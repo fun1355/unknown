@@ -7,6 +7,7 @@ https://stackoverflow.com/questions/41452314/static-analysis-tools-for-llvm-ir
 ## klee-uclibc
 uclibc is for embedded systems，MMU-less systems. 因为klee内存密集型，所以自己改了uclibc, https://www.uclibc.org/FAQ.html
 ## minisat
+
 ## STP
 SMT solver aimed at bitvectors and arrays. 这个比较老了，最迟参加了2014 SMTCOMP。https://github.com/stp/stp
 ## z3
@@ -14,4 +15,10 @@ SMT solver from Microsoft Research, http://theory.stanford.edu/~nikolaj/programm
 
 他的架构还是很经典的。后面的工程CLOVER不过是他的C++的“补丁”。
 
-# 
+# LAV
+http://argo.matf.bg.ac.rs/lav/README.txt
+lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT solver因为发行版权问题未采用。）作为后端的Solver，可以在configure的时候指定，如：
+$./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
+他的代码结构就很值得研究了。
+
+
