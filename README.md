@@ -39,3 +39,6 @@ Our SATzilla version used in [9] was based on classification models built in Mat
 http://www.cs.ubc.ca/labs/beta/Projects/SATzilla/Report_SAT_features.pdf
 关于如何选择SAT的特性的。
 
+# LLBMC
+这个项目是基于LLVM对C的Bound Model Checker（目标是C的内存错误）。它先把C代码转成LLVM的IR，再转成logical representation并利用重写规则简化，然后将简化的方程最终传到STP（a SMT solver）。
+LLBMC requires llvm-gcc (version 2.9) in order to convert C input files to LLVM’s intermediate representation. 
