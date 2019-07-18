@@ -21,4 +21,12 @@ lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT s
 $./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
 他的代码结构就很值得研究了。
 
+# KLOVER
+http://www.cs.utah.edu/~ligd/publications/KLOVER-CAV11.pdf
+这个项目是基于KLEE的C++的扩展。我找不到代码。
+这篇论文提出了一些很好的问题，比如： How to extend a symbolic executor to handle C++ features? 但是没有说怎么实现。
+只是举了添加字符串的长度限制的例子。
+while in [5] we describe how to extend KLOVER for GPU programs。参考论文5 可以看看，如果要用GPU扩展的话。
+compare symbolic execution with other symbolic methods [6] for concurrent programs. 参考论文6，多线程。
+
 
