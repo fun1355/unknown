@@ -20,6 +20,14 @@ http://argo.matf.bg.ac.rs/lav/README.txt
 lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT solver因为发行版权问题未采用。）作为后端的Solver，可以在configure的时候指定，如：
 $./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
 他的代码结构就很值得研究了。
+## yices
+- Yices SMT solver (http://yices.csl.sri.com)
+## boolector 
+- Boolector SMT solver (http://fmv.jku.at/boolector/)
+## mathsat   
+- MathSAT SMT solver (http://mathsat.itc.it/)
+## z3
+- Z3 SMT solver (https://github.com/Z3Prover/z3/releases)
 
 # KLOVER
 http://www.cs.utah.edu/~ligd/publications/KLOVER-CAV11.pdf
