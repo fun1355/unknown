@@ -30,3 +30,12 @@ while in [5] we describe how to extend KLOVER for GPU programs。参考论文5 �
 compare symbolic execution with other symbolic methods [6] for concurrent programs. 参考论文6，多线程。
 
 
+# SATzilla
+我的论文是2012的，http://www.cs.ubc.ca/labs/beta/Projects/SATzilla/SATzilla2012final.pdf
+看烦了，这论文写得太简略了.只有2页关于自己选择SAT的步骤和半页参考链接。
+而且很有意思的，他的实现涉及MATLAB，JAVA，RUBY等：
+Our SATzilla version used in [9] was based on classification models built in Matlab, and its execution required the installation of the free Matlab runtime environment (MRE). In order to avoid the need for installing MRE, we now con- verted our Matlab-built models to Java and provide Java code to make predictions using them. Thus, running SATzilla2012 now only requires the scripting lan- guage Ruby (which is used for running the SATzilla pipeline).
+2017的代码，只有bin的脚本，jar包，以及例子，没有代码. 2012的代码也运行不起来。
+http://www.cs.ubc.ca/labs/beta/Projects/SATzilla/Report_SAT_features.pdf
+关于如何选择SAT的特性的。
+
