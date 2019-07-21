@@ -21,7 +21,9 @@ lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT s
 $./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
 他的代码结构就很值得研究了。
 ## yices
-- Yices SMT solver (http://yices.csl.sri.com)
+- Yices SMT solver (http://yices.csl.sri.com) 
+这个sri.com的网站，我这两天上不去了。只能访问github，https://github.com/SRI-CSL/yices2 。我挺喜欢这个工程，自带lisp-like的语言的。他的menual很详细，github还持续更新。他的输入，支持SMT-LIB 1.2和SMT-LIB 2.5。代码目录有example，有命令行yices，yices-smt2，yices-smt等命令行工具。
+我发现很多SMT之间都能互相调用，他们都有相似的"接口"，比如SMT-LIB、DIMACS等。
 ## boolector 
 - Boolector SMT solver (http://fmv.jku.at/boolector/)
 ## mathsat   
@@ -51,3 +53,25 @@ http://www.cs.ubc.ca/labs/beta/Projects/SATzilla/Report_SAT_features.pdf
 https://link.springer.com/content/pdf/10.1007%2F978-3-642-28756-5_44.pdf
 这个项目是基于LLVM对C的Bound Model Checker（目标是C的内存错误）。它先把C代码转成LLVM的IR，再转成logical representation并利用重写规则简化，然后将简化的方程最终传到STP（a SMT solver）。
 LLBMC requires llvm-gcc (version 2.9) in order to convert C input files to LLVM’s intermediate representation. 
+
+# DIMACS
+一种cnf（主要）的表示方式。举例：
+```
+c
+c start with comments
+c
+c 
+p cnf 5 3
+1 -5 4 0
+-1 5 3 4 0
+-3 -4 0
+```
+- the preamble:
+The file can start with comments, that is lines begining with the character c.
+- the problem line:
+```
+p cnf nbvar nbclauses
+```
+- the clause sections:
+Each clause is a sequence of distinct non-null numbers between -nbvar and nbvar ending with 0 on the same line; it cannot contain the opposite literals i and -i simultaneously. Positive numbers denote the corresponding variables. Negative numbers denote the negations of the corresponding variables.
+
