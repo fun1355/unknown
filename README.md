@@ -1,5 +1,26 @@
 https://stackoverflow.com/questions/41452314/static-analysis-tools-for-llvm-ir
-
+```
+|----------|-----------|-----------|-----------|---------|-----------|---------|------|
+| Tool     | LAV       | CBMC      | ESBMC     | KLEE    | LLBMC     | CALYSTO | PEX  |
+|----------|-----------|-----------|-----------|---------|-----------|---------|------|
+| Frontend | LLVM      | gcc       | gcc       | LLVM    | LLVM      | LLVM    | .NET |
+|----------|-----------|-----------|-----------|---------|-----------|---------|------|
+| Theories | -         | PL        | -         | -       | -         | -       | -    |
+|          | LA        | -         | LA        | -       | -         | -       | LA   |
+|          | BV        | -         | BV        | BV      | BV        | BV      | BV   |
+|          | EUF       | -         | EUF       | -       | -         | -       | EUF  |
+|          | ARR.      | -         | ARR.      | ARR.    | ARR.      | -       | ARR. |
+|----------|-----------|-----------|-----------|---------|-----------|---------|------|
+| Solvers  | MathSAT   | MathSAT   | MathSAT   | -       | -         | -       | -    |
+|          | Boolector | Boolector | Boolector | -       | Boolector | -       | -    |
+|          | Z3        | Z3        | Z3        | Z3      | Z3        | -       | Z3   |
+|          | Yices     | Yices     | Yices     | -       | -         | -       | -    |
+|          | -         | -         | -         | STP     | STP       | -       | -    |
+|          | -         | MiniSAT2  | CVC       | MetaSAT | -         | Spear   | -    |
+|----------|-----------|-----------|-----------|---------|-----------|---------|------|
+linear arithmetic (LA),  bit-vector arithmetic (BVA), theory of uninterpreted functions (EUF),
+theory of arrays (ARRAYS)。
+```
 # KLEE
 这个编译起来非常复杂。我上次在mac上编译不成功。我参考的是这个 https://github.com/tum-i22/klee-install, 只能用Ubuntu才能编译成功。好像依赖库uclibc缺乏头文件，提示我可以继续用KLEE，但是会有限制，应该是最大内存的限制。但是SAT都是开很大内存，几百万个参数一起算的，后面好像编译不成功是LLVM的版本太新了，我的用8，他配套的是RELEASE_342.有个数据结构变了。浪费我2天时候。我把主要的错误记录在这里了，https://github.com/sancao2/klee-install.
 后来用docker，半个小时就搭建好了。
@@ -13,23 +34,27 @@ SMT solver aimed at bitvectors and arrays. 这个比较老了，最迟参加了2
 ## z3
 SMT solver from Microsoft Research, http://theory.stanford.edu/~nikolaj/programmingz3.html, 这个文档第一个架构图可以参考，整个文档都是很好的学习资料。
 
-他的架构还是很经典的。后面的工程CLOVER不过是他的C++的“补丁”。
+KLEE的架构还是很经典的。后面的工程CLOVER不过是他的C++的“补丁”。
 
 # LAV
 http://argo.matf.bg.ac.rs/lav/README.txt
 lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT solver因为发行版权问题未采用。）作为后端的Solver，可以在configure的时候指定，如：
 $./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
 他的代码结构就很值得研究了。
+
 ## yices
 - Yices SMT solver (http://yices.csl.sri.com) 
 这个sri.com的网站，我这两天上不去了。只能访问github，https://github.com/SRI-CSL/yices2 。我挺喜欢这个工程，自带lisp-like的语言的。他的menual很详细，github还持续更新。他的输入，支持SMT-LIB 1.2和SMT-LIB 2.5。代码目录有example，有命令行yices，yices-smt2，yices-smt等命令行工具。
 我发现很多SMT之间都能互相调用，他们都有相似的"接口"，比如SMT-LIB、DIMACS等。
 ## boolector 
 - Boolector SMT solver (http://fmv.jku.at/boolector/)
+(BVA and ARRAYS)
 ## mathsat   
 - MathSAT SMT solver (http://mathsat.itc.it/)
+(LA, BVA, EUF)
 ## z3
 - Z3 SMT solver (https://github.com/Z3Prover/z3/releases)
+(LA, BVA, EUF, ARRAYS)
 
 # KLOVER
 http://www.cs.utah.edu/~ligd/publications/KLOVER-CAV11.pdf
