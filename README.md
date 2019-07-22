@@ -1,25 +1,26 @@
 https://stackoverflow.com/questions/41452314/static-analysis-tools-for-llvm-ir
 ```
-|----------|-----------|-----------|-----------|---------|-----------|---------|------|
-| Tool     | LAV       | CBMC      | ESBMC     | KLEE    | LLBMC     | CALYSTO | PEX  |
-|----------|-----------|-----------|-----------|---------|-----------|---------|------|
-| Frontend | LLVM      | gcc       | gcc       | LLVM    | LLVM      | LLVM    | .NET |
-|----------|-----------|-----------|-----------|---------|-----------|---------|------|
-| Theories | -         | PL        | -         | -       | -         | -       | -    |
-|          | LA        | -         | LA        | -       | -         | -       | LA   |
-|          | BV        | -         | BV        | BV      | BV        | BV      | BV   |
-|          | EUF       | -         | EUF       | -       | -         | -       | EUF  |
-|          | ARR.      | -         | ARR.      | ARR.    | ARR.      | -       | ARR. |
-|----------|-----------|-----------|-----------|---------|-----------|---------|------|
-| Solvers  | MathSAT   | MathSAT   | MathSAT   | -       | -         | -       | -    |
-|          | Boolector | Boolector | Boolector | -       | Boolector | -       | -    |
-|          | Z3        | Z3        | Z3        | Z3      | Z3        | -       | Z3   |
-|          | Yices     | Yices     | Yices     | -       | -         | -       | -    |
-|          | -         | -         | -         | STP     | STP       | -       | -    |
-|          | -         | MiniSAT2  | CVC       | MetaSAT | -         | Spear   | -    |
-|----------|-----------|-----------|-----------|---------|-----------|---------|------|
-linear arithmetic (LA),  bit-vector arithmetic (BVA), theory of uninterpreted functions (EUF),
-theory of arrays (ARRAYS)。
+|----------|-----------|--------------|--------------|---------|-----------|---------|------|
+| Tool     | LAV       | CBMC         | ESBMC        | KLEE    | LLBMC     | CALYSTO | PEX  |
+|----------|-----------|--------------|--------------|---------|-----------|---------|------|
+| Frontend | LLVM      | goto-cc(gcc) | goto-cc(gcc) | LLVM    | LLVM      | LLVM    | .NET |
+|----------|-----------|--------------|--------------|---------|-----------|---------|------|
+| Theories | -         | PL           | -            | -       | -         | -       | -    |
+|          | LA        | -            | LA           | -       | -         | -       | LA   |
+|          | BV        | -            | BV           | BV      | BV        | BV      | BV   |
+|          | EUF       | -            | EUF          | -       | -         | -       | EUF  |
+|          | ARR.      | -            | ARR.         | ARR.    | ARR.      | -       | ARR. |
+|----------|-----------|--------------|--------------|---------|-----------|---------|------|
+| Solvers  | MathSAT   | MathSAT      | MathSAT      | -       | -         | -       | -    |
+|          | Boolector | Boolector    | Boolector    | -       | Boolector | -       | -    |
+|          | Z3        | Z3           | Z3           | Z3      | Z3        | -       | Z3   |
+|          | Yices     | Yices        | Yices        | -       | -         | -       | -    |
+|          | -         | -            | -            | STP     | STP       | -       | -    |
+|          | -         | MiniSAT2     | CVC          | MetaSAT | -         | Spear   | -    |
+|----------|-----------|--------------|--------------|---------|-----------|---------|------|
+Propositional Logic (PL), linear arithmetic (LA),  bit-vector arithmetic (BVA), 
+theory of uninterpreted functions (EUF), theory of arrays (ARRAYS)。
+goto-cc: a compiler from C and C++ into GOTO-programs
 ```
 # KLEE
 这个编译起来非常复杂。我上次在mac上编译不成功。我参考的是这个 https://github.com/tum-i22/klee-install, 只能用Ubuntu才能编译成功。好像依赖库uclibc缺乏头文件，提示我可以继续用KLEE，但是会有限制，应该是最大内存的限制。但是SAT都是开很大内存，几百万个参数一起算的，后面好像编译不成功是LLVM的版本太新了，我的用8，他配套的是RELEASE_342.有个数据结构变了。浪费我2天时候。我把主要的错误记录在这里了，https://github.com/sancao2/klee-install.
