@@ -41,7 +41,7 @@ KLEE的架构还是很经典的。后面的工程CLOVER不过是他的C++的“�
 http://argo.matf.bg.ac.rs/lav/README.txt
 lav 很具有前途，他可以用yices，boolector，mathsat，z3（其他SMT solver因为发行版权问题未采用。）作为后端的Solver，可以在configure的时候指定，如：
 $./configure --with-llvm=<path/to/llvm> --enable-<solver1> [--enable-<solver2>] [--enable-<solver3>] [--enable-<solver4>]
-他的代码结构就很值得研究了。
+～～他的代码结构就很值得研究了。～～ LAV1.4 竟然依赖2013年的LLVM3.3. 让我看了这么久的文档，架构竟然从来不更新。关于代码架构的文档，只字未提。我尝试构建一下把。
 
 ## yices
 - Yices SMT solver (http://yices.csl.sri.com) 
